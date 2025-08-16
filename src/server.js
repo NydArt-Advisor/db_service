@@ -18,8 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Basic route
-app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to NydArt Advisor Database Service' });
+app.get("/", (req, res) => {
+  res.send("Database Service is running");
 });
 
 // Routes
