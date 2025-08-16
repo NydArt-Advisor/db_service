@@ -56,7 +56,7 @@ async function updateExistingUsers() {
 // Run migration if this file is executed directly
 if (require.main === module) {
     // Connect to MongoDB
-    const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/art_advisor';
+    const MONGODB_URI = process.env.MONGODB_URI;
     
     mongoose.connect(MONGODB_URI)
         .then(() => {
