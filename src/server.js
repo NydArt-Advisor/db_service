@@ -9,6 +9,22 @@ promClient.collectDefaultMetrics({ register });
 // Initialize Express
 const app = express();
 
+// Critical environment variables check
+const criticalEnvVars = [
+    'MONGODB_URI'
+];
+
+const missingVars = criticalEnvVars.filter(varName => !process.env[varName]);
+
+if (missingVars.length > 0) {
+    console.error('❌ Critical environment variables missing:', missingVars);
+    console.error('Please check your .env file and ensure all required variables are set.');
+    console.error('See ENVIRONMENT_SETUP.md for setup instructions.');
+    process.exit(1);
+} else {
+    console.log('✅ All critical environment variables are set');
+}
+
 // Trust proxy configuration for rate limiting behind load balancers/proxies
 app.set('trust proxy', 1);
 
