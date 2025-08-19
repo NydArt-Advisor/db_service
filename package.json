@@ -6,7 +6,15 @@
     "scripts": {
         "start": "node src/server.js",
         "dev": "nodemon src/server.js",
-        "test": "node database.test.js",
+        "test": "node src/test/simple-test.js",
+        "test:full": "node src/test/run-tests.js",
+        "test:unit": "node src/test/run-tests.js --unit",
+        "test:integration": "node src/test/run-tests.js --integration",
+        "test:performance": "node src/test/run-tests.js --performance",
+        "test:coverage": "node src/test/run-tests.js --coverage",
+        "test:watch": "node src/test/run-tests.js --watch",
+        "test:file": "node src/test/run-tests.js --file",
+        "test:legacy": "node database.test.js",
         "test:health": "node -e \"require('./database.test.js')\"",
         "migrate": "node src/migrations/updateExistingUsers.js"
     },
@@ -28,6 +36,11 @@
         "prom-client": "^15.1.3"
     },
     "devDependencies": {
-        "nodemon": "^2.0.22"
+        "nodemon": "^2.0.22",
+        "mocha": "^10.2.0",
+        "chai": "^4.3.7",
+        "sinon": "^15.1.0",
+        "supertest": "^6.3.3",
+        "nyc": "^15.1.0"
     }
 }
