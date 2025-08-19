@@ -81,6 +81,16 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok' });
 });
 
+// Health check endpoint (alternative path)
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'OK', 
+        service: 'Database Service',
+        environment: process.env.NODE_ENV,
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Metrics endpoint
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', register.contentType);
@@ -96,8 +106,14 @@ app.use((err, req, res, next) => {
     });
 });
 
-const PORT = process.env.PORT || 5001;
+// Export app for testing
+module.exports = app;
 
-app.listen(PORT, () => {
-    console.log(`Database Service is running on port ${PORT}`);
-}); 
+// Only start the server if this file is run directly
+if (require.main === module) {
+    const PORT = process.env.PORT || 5001;
+
+    app.listen(PORT, () => {
+        console.log(`Database Service is running on port ${PORT}`);
+    });
+} 
